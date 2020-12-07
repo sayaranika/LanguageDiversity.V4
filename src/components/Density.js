@@ -4,7 +4,7 @@ import { render } from "react-dom";
 import ReactMapGL, { StaticMap } from "react-map-gl";
 import DeckGL from "@deck.gl/react";
 import { ScatterplotLayer } from "@deck.gl/layers";
-import lData from "./data/lang_diversity.json";
+import lData from "../data/lang_diversity.json";
 
 const REACT_APP_MAPBOX_TOKEN =
   "pk.eyJ1Ijoic2F5YW5pa2EiLCJhIjoiY2toaHM2ajlkMDd1eDJ6cGgxM2dmdThzOSJ9.xlEQGt0fM1CT2ZS_N8iV-Q";
