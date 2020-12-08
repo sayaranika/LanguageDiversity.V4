@@ -21,14 +21,23 @@ const languageIndex = [
   { label: "Farsi", value: "v_CA16_1937" },
 ];
 
+const colorPalette = [
+  [255, 237, 111],
+  [227, 26, 28],
+  [31, 120, 180],
+];
+
+let assignedColors = [
+  { label: "v_CA16_1916", value: 0 },
+  { label: "v_CA16_2060", value: 1 },
+];
+
 const REACT_APP_MAPBOX_TOKEN =
   "pk.eyJ1Ijoic2F5YW5pa2EiLCJhIjoiY2toaHM2ajlkMDd1eDJ6cGgxM2dmdThzOSJ9.xlEQGt0fM1CT2ZS_N8iV-Q";
 
 const INITIAL_VIEW_STATE = {
   longitude: -123.07797,
   latitude: 49.3,
-  //longitude: -123.07797,
-  //latitude: 49.314084,
   zoom: 10,
   maxZoom: 16,
   pitch: 0,
@@ -50,7 +59,9 @@ function Density({
       getPosition: (d) => [d[0], d[1]],
       getFillColor: (d) => get_colour(d[2]),
       getRadius: 1,
-      updateTriggers: {},
+      updateTriggers: {
+        //getFillColor: assignedColors
+      },
     }),
   ];
 
@@ -76,7 +87,9 @@ function Density({
             <Select
               components={makeAnimated()}
               theme={customTheme}
-              onChange={setSelectedLanguage}
+              onChange={(values) => {
+                setSelectedLanguage(values);
+              }}
               options={languageIndex}
               className="mb-3"
               isMulti
@@ -84,20 +97,43 @@ function Density({
               autofocus
               isSearchable
             />
+            <button onClick={showDensity}>show</button>
           </div>
         </div>
       </div>
     </div>
   );
-}
 
-function get_colour(d) {
-  //console.log(d);
-  return [255, 237, 111];
-  /* if (d === selections[0]) return [255, 237, 111];
-  else if (d === selections[1]) return [227, 26, 28];
-  else if (d === selections[2]) [31, 120, 180];
-  else return [0, 128, 255, 0]; */
+  var i;
+  var newElement = {};
+  function showDensity() {
+    i = 0;
+    assignedColors = [];
+    selectedLanguage.forEach((lang) => {
+      newElement = { label: lang.value, value: i };
+      assignedColors.push(newElement);
+      i++;
+    });
+  }
+
+  function get_colour(d) {
+    var index = -1;
+    index = assignedColors.findIndex((x) => x.label === d);
+
+    if (index !== -1) {
+      console.log(
+        "d: " +
+          d +
+          "colorVal: " +
+          assignedColors[index]["label"] +
+          "colorIn:" +
+          assignedColors[index]["value"] +
+          "index: " +
+          index
+      );
+      return colorPalette[assignedColors[index]["value"]];
+    } else return [255, 255, 255, 0];
+  }
 }
 
 function customTheme(theme) {
@@ -105,7 +141,7 @@ function customTheme(theme) {
     ...theme,
     colors: {
       ...theme.colors,
-      primary25: "orange",
+      primary25: "yellow",
       primary: "orange",
     },
   };
