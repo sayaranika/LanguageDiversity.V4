@@ -10,6 +10,7 @@ import Select from "react-select";
 import makeAnimated from "react-select/animated";
 import { render } from "@testing-library/react";
 
+var i = 0;
 const languageIndex = [
   { label: "English", value: "v_CA16_1364" },
   { label: "French", value: "v_CA16_1367" },
@@ -141,10 +142,11 @@ const DensityAlt = () => {
       },
     };
   }
-  var i;
+  //var i;
   var newElement = {};
   function showDensity() {
-    i = 0;
+    //i = 0;
+    if (i > 5) i = 0;
     assignedColors = [];
     selectedLanguage.forEach((lang) => {
       newElement = { label: lang.value, value: i };

@@ -13,7 +13,15 @@ function App() {
         <Navbar />
         <Switch>
           <Route path="/densityMap" component={Density}></Route>
-          <Route path="/diversityMap" component={Diversity}></Route>
+          {/* <Route path="/diversityMap" component={Diversity}></Route> */}
+          <Route
+            exact
+            path="/diversityMap"
+            render={() => {
+              window.location.href =
+                "../public/diversityMap/diversityIndex.html";
+            }}
+          />
         </Switch>
       </div>
     </Router>
