@@ -1,0 +1,15 @@
+#mydiv {
+    position: absolute;
+    cursor: move;
+    opacity: 1;
+}
+
+.neighborhood {
+    fill-opacity: 0;
+    stroke: black;
+    stroke-width: 1;
+}
+
+.tick text {
+    font-size: 5pt;
+}
